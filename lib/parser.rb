@@ -2,10 +2,9 @@ module Parser
   def char_separator(str)
     len = str.length - 1
     array = two_d_array_initializer(len, 2)
-    i = 0
     line_num = 1
     char_num = 1
-    while i < str.length
+    (0..len).each do |i|
       array[i][0] = str[i]
       array[i][1] = char_num
       array[i][2] = line_num
@@ -15,7 +14,6 @@ module Parser
       else
         char_num += 1
       end
-      i += 1
     end
     array
   end
@@ -31,3 +29,14 @@ module Parser
     array
   end
 end
+
+class Test
+  include Parser
+end
+
+new_test = Test.new
+
+string = "def add
+      end"
+p arr = new_test.char_separator(string)
+
