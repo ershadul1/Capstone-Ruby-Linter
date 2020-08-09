@@ -46,4 +46,18 @@ describe StyleRules do
       expect(redundant_space(arr)).to eql(0)
     end
   end
+
+  context '#trailing_space' do
+    it 'when two trailing space included' do
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+             [" ", 8, 1], ["\n", 9, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2], [" ", 5, 2], ["\n", 6, 2]]
+      expect(trailing_space(arr)).to eql(2)
+    end
+
+    it 'when no trailing space included' do
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+             ["\n", 8, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
+      expect(trailing_space(arr)).to eql(0)
+    end
+  end
 end
