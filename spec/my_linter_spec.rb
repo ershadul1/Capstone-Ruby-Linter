@@ -1,4 +1,5 @@
 require_relative '../lib/parser.rb'
+require_relative '../lib/style_rules.rb'
 
 describe Parser do
   include Parser

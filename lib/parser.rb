@@ -30,25 +30,12 @@ module Parser
   end
 end
 
-def redundant_space(arr)
-  counter = 0
-  (0..arr.length-1).each do |i|
-    if arr[i][0] == ' '
-      counter += 1
-    else
-      counter = 0
-    end
-    puts "Redundant-Space @ line: #{arr[i][2]} column: #{arr[i][1]} " if counter > 1
-  end
-end
+# class Test
+#   include Parser
+# end
 
-class Test
-  include Parser
-end
+# new_test = Test.new
 
-new_test = Test.new
-
-string = "def add 
- end"
-p arr = new_test.char_separator(string)
-redundant_space(arr)
+# string = "def add
+#  end"
+# p arr = new_test.char_separator(string)
