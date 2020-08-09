@@ -32,3 +32,18 @@ describe Parser do
     end
   end
 end
+
+describe StyleRules do
+  include StyleRules
+  context '#redundant_space' do
+    it 'when one redundant space included' do
+      arr = [["i", 1, 1], ["f", 2, 1], [" ", 3, 1], [" ", 4, 1], ["a", 5, 1], [">", 6, 1], ["5", 6, 1]]
+      expect(redundant_space(arr)).to eql(1)
+    end
+
+    it 'when no redundant space included' do
+      arr = [["i", 1, 1], ["f", 2, 1], [" ", 3, 1], ["b", 4, 1], ["a", 5, 1], [">", 6, 1], ["5", 6, 1]]
+      expect(redundant_space(arr)).to eql(0)
+    end
+  end
+end
