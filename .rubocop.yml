@@ -49,3 +49,5 @@ Style/HashTransformValues:
   Enabled: false
 Style/BlockComments:
   Enabled: false
+Style/StringLiterals:
+  Enabled: false
