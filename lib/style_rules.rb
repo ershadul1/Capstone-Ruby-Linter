@@ -54,7 +54,7 @@ module StyleRules
       next unless arr[i][1] > 70 && arr[i][2] != line_num
 
       line_num = arr[i][2]
-      puts "Exceed-Max-Line-Length @ line #{line_num}"
+      puts "Exceed-Max-Line-Length(70) @ line #{line_num}"
       warnings += 1
     end
     warnings
