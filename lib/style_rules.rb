@@ -51,11 +51,11 @@ module StyleRules
     line_num = 0
     warnings = 0
     (0..arr.length - 1).each do |i|
-      if arr[i][1] > 70 && arr[i][2] != line_num
-        line_num = arr[i][2]
-        puts "Exceed-Max-Line-Length @ line #{line_num}"
-        warnings += 1
-      end
+      next unless arr[i][1] > 70 && arr[i][2] != line_num
+
+      line_num = arr[i][2]
+      puts "Exceed-Max-Line-Length @ line #{line_num}"
+      warnings += 1
     end
     warnings
   end
