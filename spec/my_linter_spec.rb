@@ -60,4 +60,20 @@ describe StyleRules do
       expect(trailing_space(arr)).to eql(0)
     end
   end
+
+  context '#blank_line' do
+    it 'when two blank lines are included' do
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+             ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], ["\n", 3, 2], [" ", 1, 3], [" ", 2, 3], [" ", 3, 3],
+             ["s", 4, 3], ["\n", 5, 3], [" ", 1, 4], [" ", 2, 4], [" ", 3, 4], [" ", 4, 4], ["\n", 5, 4],
+             ["e", 1, 5], ["n", 2, 5], ["d", 3, 5]]
+      expect(blank_line(arr)).to eql(2)
+    end
+
+    it 'when no blank line included' do
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+             ["\n", 8, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
+      expect(blank_line(arr)).to eql(0)
+    end
+  end
 end
