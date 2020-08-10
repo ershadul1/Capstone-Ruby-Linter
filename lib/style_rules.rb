@@ -15,13 +15,33 @@ module StyleRules
     end
     warnings
   end
-  
+
   def trailing_space(arr)
     warnings = 0
     (0..arr.length - 1).each do |i|
       if arr[i][0] == "\n" && arr[i - 1][0] == ' '
         puts "Trailing-Space @ line: #{arr[i][2]}"
         warnings += 1
+      end
+    end
+    warnings
+  end
+
+  def blank_line(arr)
+    warnings = 0
+    blank_line = 0
+    (0..arr.length - 1).each do |i|
+      if arr[i][0] == "\n"
+        blank_line += 1
+        if blank_line == 2
+          puts "Blank-line @ line: #{arr[i][2]}"
+          warnings += 1
+          blank_line = 1
+        end
+      elsif arr[i][0] == ' '
+        blank_line = blank_line
+      else
+        blank_line = 0
       end
     end
     warnings
