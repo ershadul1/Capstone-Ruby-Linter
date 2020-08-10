@@ -35,6 +35,12 @@ end
 
 describe StyleRules do
   include StyleRules
+
+  let(:test_arr) do
+    [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+     ["\n", 8, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
+  end
+
   context '#redundant_space' do
     it 'when one redundant space included' do
       arr = [["i", 1, 1], ["f", 2, 1], [" ", 3, 1], [" ", 4, 1], ["a", 5, 1], [">", 6, 1], ["5", 6, 1]]
@@ -42,8 +48,7 @@ describe StyleRules do
     end
 
     it 'when no redundant space included' do
-      arr = [["i", 1, 1], ["f", 2, 1], [" ", 3, 1], ["b", 4, 1], ["a", 5, 1], [">", 6, 1], ["5", 6, 1]]
-      expect(redundant_space(arr)).to eql(0)
+      expect(redundant_space(test_arr)).to eql(0)
     end
   end
 
@@ -55,9 +60,7 @@ describe StyleRules do
     end
 
     it 'when no trailing space included' do
-      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
-             ["\n", 8, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
-      expect(trailing_space(arr)).to eql(0)
+      expect(trailing_space(test_arr)).to eql(0)
     end
   end
 
@@ -71,9 +74,28 @@ describe StyleRules do
     end
 
     it 'when no blank line included' do
+      expect(blank_line(test_arr)).to eql(0)
+    end
+  end
+
+  context '#exceed_line_length' do
+    it 'when maximum line length exceeded' do
       arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
-             ["\n", 8, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
-      expect(blank_line(arr)).to eql(0)
+             [" ", 8, 1], ["h", 9, 1], ["e", 10, 1], ["l", 11, 1], ["l", 12, 1], ["o", 13, 1], [" ", 14, 1],
+             ["d", 15, 1], ["e", 16, 1], ["f", 17, 1], [" ", 18, 1], ["a", 19, 1], ["d", 20, 1], ["d", 21, 1],
+             [" ", 22, 1], ["h", 23, 1], ["e", 24, 1], ["l", 25, 1], ["l", 26, 1], ["o", 27, 1], [" ", 28, 1],
+             ["d", 29, 1], ["e", 30, 1], ["f", 31, 1], [" ", 32, 1], ["a", 33, 1], ["d", 34, 1], ["d", 35, 1],
+             [" ", 36, 1], ["h", 37, 1], ["e", 38, 1], ["l", 39, 1], ["l", 40, 1], ["o", 41, 1], [" ", 42, 1],
+             ["d", 43, 1], ["e", 44, 1], ["f", 45, 1], [" ", 46, 1], ["a", 47, 1], ["d", 48, 1], ["d", 49, 1],
+             [" ", 50, 1], ["h", 51, 1], ["e", 52, 1], ["l", 53, 1], ["l", 54, 1], ["o", 55, 1], [" ", 56, 1],
+             ["d", 57, 1], ["e", 58, 1], ["f", 59, 1], [" ", 60, 1], ["a", 61, 1], ["d", 62, 1], ["d", 63, 1],
+             [" ", 64, 1], ["h", 65, 1], ["e", 66, 1], ["l", 67, 1], ["l", 68, 1], ["o", 69, 1], [" ", 70, 1],
+             ["d", 71, 1], ["e", 72, 1], ["f", 73, 1], [" ", 74, 1]]
+      expect(exceed_line_length(arr)).to eql(1)
+    end
+
+    it 'when maximum line length not exceeded' do
+      expect(exceed_line_length(test_arr)).to eql(0)
     end
   end
 end
