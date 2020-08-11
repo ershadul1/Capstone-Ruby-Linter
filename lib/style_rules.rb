@@ -59,4 +59,10 @@ module StyleRules
     end
     warnings
   end
+
+  def final_newline(arr)
+    return if arr[arr.length - 1][0] == "\n"
+
+    puts "Final empty newline missing"
+  end  
 end
