@@ -29,13 +29,3 @@ module Parser
     array
   end
 end
-
-# class Test
-#   include Parser
-# end
-
-# new_test = Test.new
-
-# string = "def add
-#  end"
-# p arr = new_test.char_separator(string)
