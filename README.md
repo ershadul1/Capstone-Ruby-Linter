@@ -4,7 +4,7 @@
 
 ![screenshot](screenshot/linter.png)
 
-## Features
+# Features
 
 1. Detects indentation issues 
 2. Detects trailing space
@@ -21,19 +21,19 @@
 
 ### Good
 
-`
+```
 def some_method
   do_something
 end
-`
+```
 
 ### Bad
 
-`
+```
 def some_method
 do_something
 end
-`
+```
 
 ## Trailing space
 
@@ -46,7 +46,7 @@ end
 
 ### Good
 
-`
+```
 def some_method
   do_something
 end
@@ -54,16 +54,16 @@ end
 def other_method
   do_something
 end
-`
+```
 
 ### Bad
 
-`
+```
 def some_method
   
   do_something
 end
-`
+```
 
 ## Maximum line length
 
@@ -71,17 +71,17 @@ end
 
 ### Good
 
-`
+```
 print 'First, and foremost - numerous studies have shown that'
 print 'humans read much faster vertically and very long lines'
 print 'of text impede the reading process.'
-`
+```
 
 ### Bad
 
-`
+```
 print 'First, and foremost - numerous studies have shown that humans read much faster vertically and very long lines of text impede the reading process.'
-`
+```
 
 ## Redundant spaces
 
@@ -89,20 +89,20 @@ print 'First, and foremost - numerous studies have shown that humans read much f
 
 ### Good
 
-`
+```
 def some_method
   do_something
 end
 
-`
+```
 
 ### Bad
 
-`
+```
 def   some_method
   do_something
 end
-`
+```
 
 ## Final empty new line
 
@@ -110,20 +110,20 @@ end
 
 ### Good
 
-`
+```
 class Game
   some_code
 end
 
-`
+```
 
 ### Bad
 
-`
+```
 class Game
   some_code
 end
-`
+```
 
 ## Requirements
 
