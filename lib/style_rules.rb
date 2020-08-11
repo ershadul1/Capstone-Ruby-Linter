@@ -8,7 +8,8 @@ module StyleRules
       else
         counter = 0
       end
-      if counter > 1
+
+      if counter > 1 and !indentation_checker(arr, arr[i][2], 2)
         puts "Redundant-Space @ line: #{arr[i][2]} column: #{arr[i][1]}"
         warnings += 1
       end
@@ -20,7 +21,7 @@ module StyleRules
     warnings = 0
     (0..arr.length - 1).each do |i|
       if arr[i][0] == "\n" && arr[i - 1][0] == ' '
-        puts "Trailing-Space @ line: #{arr[i][2]}"
+        puts "Trailing-White-Space @ line: #{arr[i][2]}"
         warnings += 1
       end
     end
@@ -34,8 +35,10 @@ module StyleRules
       if arr[i][0] == "\n"
         blank_line += 1
         if blank_line == 2
-          puts "Blank-line @ line: #{arr[i][2]}"
-          warnings += 1
+          unless arr[i - 4][0] + arr[i - 3][0] + arr[i - 2][0] == 'end'
+            puts "Blank-line @ line: #{arr[i][2]}"
+            warnings += 1
+          end
           blank_line = 1
         end
       elsif arr[i][0] == ' '
