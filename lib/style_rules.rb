@@ -64,5 +64,32 @@ module StyleRules
     return if arr[arr.length - 1][0] == "\n"
 
     puts "Final empty newline missing"
-  end  
+  end
+
+  def indentation(str, arr)
+    ruby_keywords = %w[class when def while for do if else elsif module unless case until]
+    indentation = 0
+    arr_one = str.split("\n")
+    arr_one.each_with_index do |i, index|
+      arr_two = i.split(' ')
+      indentation -= 2 if arr_two.include?('end')
+      if indentation > 1 and !indentation_checker(arr, index + 1, indentation)
+        puts "Fix indentation on line #{index + 1}"
+      end
+      indentation += 2 unless (arr_two & ruby_keywords).empty?
+    end
+  end
+
+  def indentation_checker(arr, line_num, spaces)
+    result = 0
+    (0..arr.length - 1).each do |i|
+      next unless arr[i][2] == line_num
+
+      (0..spaces - 1).each do |j|
+        result += 1 if arr[i + j][0] == ' '
+      end
+      break
+    end
+    result == spaces
+  end
 end
