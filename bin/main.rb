@@ -9,12 +9,14 @@ class Linter
     @string = string
     @arr = char_separator(@string)
   end
-  
+
   def start_check
     redundant_space(@arr)
     trailing_space(@arr)
     blank_line(@arr)
     exceed_line_length(@arr)
+    final_newline(@arr)
+    indentation(@string, @arr)
   end
 end
 
