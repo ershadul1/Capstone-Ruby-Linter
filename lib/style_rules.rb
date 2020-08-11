@@ -3,12 +3,7 @@ module StyleRules
     counter = 0
     warnings = 0
     (0..arr.length - 1).each do |i|
-      if arr[i][0] == ' '
-        counter += 1
-      else
-        counter = 0
-      end
-
+      arr[i][0] == ' ' ? counter += 1 : counter = 0
       if counter > 1 and !indentation_checker(arr, arr[i][2], 2)
         puts "Redundant-Space @ line: #{arr[i][2]} column: #{arr[i][1]}"
         warnings += 1
@@ -64,12 +59,14 @@ module StyleRules
   end
 
   def final_newline(arr)
-    return if arr[arr.length - 1][0] == "\n"
+    return true if arr[arr.length - 1][0] == "\n"
 
     puts "Final empty newline missing"
+    false
   end
 
   def indentation(str, arr)
+    warnings = 0
     ruby_keywords = %w[class when def while for do if else elsif module unless case until]
     indentation = 0
     arr_one = str.split("\n")
@@ -77,10 +74,12 @@ module StyleRules
       arr_two = i.split(' ')
       indentation -= 2 if arr_two.include?('end')
       if indentation > 1 and !indentation_checker(arr, index + 1, indentation)
-        puts "Fix indentation on line #{index + 1}"
+        puts "Fix indentation @ line #{index + 1}"
+        warnings += 1
       end
       indentation += 2 unless (arr_two & ruby_keywords).empty?
     end
+    warnings
   end
 
   def indentation_checker(arr, line_num, spaces)
