@@ -2,7 +2,7 @@
 > In this project I have built a linter for ruby using ruby programming language.
 > This linter will check for style issues in your ruby code
 
-![screenshot](screenshot/linter.png)
+ ![screenshot](linter.png)
 
 # Features
 
