@@ -98,4 +98,18 @@ describe StyleRules do
       expect(exceed_line_length(test_arr)).to eql(0)
     end
   end
+
+  context '#final_newline' do
+    it 'when final empty newline included' do
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+             [" ", 8, 1], ["\n", 9, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2], [" ", 5, 2], ["\n", 6, 2]]
+      expect(final_newline(arr)).to eql(true)
+    end
+
+    it 'when final empty newline not included' do
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
+             [" ", 8, 1], ["\n", 9, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
+      expect(final_newline(arr)).to eql(false)
+    end
+  end
 end
