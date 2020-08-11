@@ -139,7 +139,7 @@ describe StyleRules do
       expect(indentation_checker(arr, 2, 2)).to eql(true)
     end
 
-    it 'when the given line does not contains proper indentation' do
+    it 'when the given line does not contain proper indentation' do
       expect(indentation_checker(test_arr, 2, 2)).to eql(false)
     end
   end
