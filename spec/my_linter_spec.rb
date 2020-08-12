@@ -34,21 +34,22 @@ describe Parser do
 end
 
 describe StyleRules do
-  include StyleRules
+  linter_test = StyleRules.new 
 
   let(:test_arr) do
     [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
-     ["\n", 8, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
+     ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], ["s", 3, 2], ["u", 4, 2], ["m", 5, 2], ["\n", 6, 2],
+     ["e", 1, 3], ["n", 2, 3], ["d", 3, 3], ["\n", 4, 3]]
   end
 
   context '#redundant_space' do
     it 'when one redundant space included' do
       arr = [["i", 1, 1], ["f", 2, 1], [" ", 3, 1], [" ", 4, 1], ["a", 5, 1], [">", 6, 1], ["5", 6, 1]]
-      expect(redundant_space(arr)).to eql(1)
+      expect(linter_test.redundant_space(arr)).to eql(1)
     end
 
     it 'when no redundant space included' do
-      expect(redundant_space(test_arr)).to eql(0)
+      expect(linter_test.redundant_space(test_arr)).to eql(0)
     end
   end
 
@@ -56,11 +57,11 @@ describe StyleRules do
     it 'when two trailing space included' do
       arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
              [" ", 8, 1], ["\n", 9, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2], [" ", 5, 2], ["\n", 6, 2]]
-      expect(trailing_space(arr)).to eql(2)
+      expect(linter_test.trailing_space(arr)).to eql(2)
     end
 
     it 'when no trailing space included' do
-      expect(trailing_space(test_arr)).to eql(0)
+      expect(linter_test.trailing_space(test_arr)).to eql(0)
     end
   end
 
@@ -70,11 +71,11 @@ describe StyleRules do
              ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], ["\n", 3, 2], [" ", 1, 3], [" ", 2, 3], [" ", 3, 3],
              ["s", 4, 3], ["\n", 5, 3], [" ", 1, 4], [" ", 2, 4], [" ", 3, 4], [" ", 4, 4], ["\n", 5, 4],
              ["e", 1, 5], ["n", 2, 5], ["d", 3, 5]]
-      expect(blank_line(arr)).to eql(2)
+      expect(linter_test.blank_line(arr)).to eql(2)
     end
 
     it 'when no blank line included' do
-      expect(blank_line(test_arr)).to eql(0)
+      expect(linter_test.blank_line(test_arr)).to eql(0)
     end
   end
 
@@ -91,11 +92,11 @@ describe StyleRules do
              ["d", 57, 1], ["e", 58, 1], ["f", 59, 1], [" ", 60, 1], ["a", 61, 1], ["d", 62, 1], ["d", 63, 1],
              [" ", 64, 1], ["h", 65, 1], ["e", 66, 1], ["l", 67, 1], ["l", 68, 1], ["o", 69, 1], [" ", 70, 1],
              ["d", 71, 1], ["e", 72, 1], ["f", 73, 1], [" ", 74, 1]]
-      expect(exceed_line_length(arr)).to eql(1)
+      expect(linter_test.exceed_line_length(arr)).to eql(1)
     end
 
     it 'when maximum line length not exceeded' do
-      expect(exceed_line_length(test_arr)).to eql(0)
+      expect(linter_test.exceed_line_length(test_arr)).to eql(0)
     end
   end
 
@@ -103,13 +104,13 @@ describe StyleRules do
     it 'when final empty newline included' do
       arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
              [" ", 8, 1], ["\n", 9, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2], [" ", 5, 2], ["\n", 6, 2]]
-      expect(final_newline(arr)).to eql(true)
+      expect(linter_test.final_newline(arr)).to eql(true)
     end
 
     it 'when final empty newline not included' do
       arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
              [" ", 8, 1], ["\n", 9, 1], [" ", 1, 2], ["e", 2, 2], ["n", 3, 2], ["d", 4, 2]]
-      expect(final_newline(arr)).to eql(false)
+      expect(linter_test.final_newline(arr)).to eql(false)
     end
   end
 
@@ -119,7 +120,7 @@ describe StyleRules do
       arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
              ["\n", 8, 1], ["a", 1, 2], [" ", 2, 2], ["+", 3, 2], [" ", 4, 2], ["b", 5, 2], ["\n", 6, 2],
              ["e", 1, 3], ["n", 2, 3], ["d", 3, 3], ["\n", 4, 3]]
-      expect(indentation(string, arr)).to eql(1)
+      expect(linter_test.indentation(string, arr)).to eql(1)
     end
 
     it 'when no indentation missing' do
@@ -127,20 +128,20 @@ describe StyleRules do
       arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
              ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], ["a", 3, 2], [" ", 4, 2], ["+", 5, 2], [" ", 6, 2],
              ["b", 7, 2], ["\n", 8, 2], ["e", 1, 3], ["n", 2, 3], ["d", 3, 3], ["\n", 4, 3]]
-      expect(indentation(string, arr)).to eql(0)
+      expect(linter_test.indentation(string, arr)).to eql(0)
     end
   end
 
   context '#indentation_checker' do
     it 'when the given line contains proper indentation' do
-      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],
-             ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], ["a", 3, 2], [" ", 4, 2], ["+", 5, 2], [" ", 6, 2],
-             ["b", 7, 2], ["\n", 8, 2], ["e", 1, 3], ["n", 2, 3], ["d", 3, 3], ["\n", 4, 3]]
-      expect(indentation_checker(arr, 2, 2)).to eql(true)
+      expect(linter_test.indentation_checker(test_arr, 2, 2)).to eql(true)
     end
 
     it 'when the given line does not contain proper indentation' do
-      expect(indentation_checker(test_arr, 2, 2)).to eql(false)
+      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1],
+             ["d", 7, 1], ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], [" ", 3, 2], [" ", 4, 2],
+             ["s", 5, 2], ["u", 6, 2], ["m", 7, 2], ["\n", 8, 2], ["e", 1, 3], ["n", 2, 3], ["d", 3, 3]]
+      expect(linter_test.indentation_checker(arr, 2, 2)).to eql(false)
     end
   end
 end

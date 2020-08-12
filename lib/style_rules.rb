@@ -69,10 +69,11 @@ class StyleRules
   end
 
   def final_newline(arr)
-    return 0 if arr[arr.length - 1][0] == "\n"
+    return true if arr[arr.length - 1][0] == "\n"
 
     @total_warnings += 1
     puts "Final empty newline missing"
+    false
   end
 
   def indentation(str, arr)
