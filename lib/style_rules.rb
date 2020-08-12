@@ -4,7 +4,7 @@ module StyleRules
     warnings = 0
     (0..arr.length - 1).each do |i|
       arr[i][0] == ' ' ? counter += 1 : counter = 0
-      if counter > 1 and !indentation_checker(arr, arr[i][2], 2)
+      if counter > 1 and !a_indentation_space?(arr, arr[i][2], arr[i][1])
         puts "Redundant-Space @ line: #{arr[i][2]} column: #{arr[i][1]}"
         warnings += 1
       end
@@ -95,5 +95,20 @@ module StyleRules
       break
     end
     result == spaces
+  end
+
+  def a_indentation_space?(arr, line_num, column_num)
+    result = 0
+    (0..arr.length - 1).each do |i|
+      next unless arr[i][2] == line_num
+
+      j = i
+      while arr[j][0] == ' '
+        result += 1
+        j += 1
+      end
+      break
+    end
+    column_num <= result
   end
 end
