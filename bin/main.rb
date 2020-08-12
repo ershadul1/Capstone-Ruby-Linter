@@ -2,7 +2,6 @@ require_relative '../lib/parser.rb'
 require_relative '../lib/style_rules.rb'
 
 class Linter
-  include StyleRules
   include Parser
 
   attr_reader :string, :arr
@@ -13,12 +12,14 @@ class Linter
   end
 
   def start_check
-    redundant_space(@arr)
-    trailing_space(@arr)
-    blank_line(@arr)
-    exceed_line_length(@arr)
-    final_newline(@arr)
-    indentation(@string, @arr)
+    test = StyleRules.new
+    test.redundant_space(@arr)
+    test.trailing_space(@arr)
+    test.blank_line(@arr)
+    test.exceed_line_length(@arr)
+    test.final_newline(@arr)
+    test.indentation(@string, @arr)
+    test.total_num_of_issues
   end
 end
 
