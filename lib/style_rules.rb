@@ -1,4 +1,10 @@
-module StyleRules
+class StyleRules
+  attr_reader :total_warnings
+
+  def initialize
+    @total_warnings = 0
+  end
+
   def redundant_space(arr)
     counter = 0
     warnings = 0
@@ -9,6 +15,7 @@ module StyleRules
         warnings += 1
       end
     end
+    @total_warnings += warnings
     warnings
   end
 
@@ -20,6 +27,7 @@ module StyleRules
         warnings += 1
       end
     end
+    @total_warnings += warnings
     warnings
   end
 
@@ -42,6 +50,7 @@ module StyleRules
         blank_line = 0
       end
     end
+    @total_warnings += warnings
     warnings
   end
 
@@ -55,14 +64,15 @@ module StyleRules
       puts "Exceed-Max-Line-Length(70) @ line #{line_num}"
       warnings += 1
     end
+    @total_warnings += warnings
     warnings
   end
 
   def final_newline(arr)
-    return true if arr[arr.length - 1][0] == "\n"
+    return 0 if arr[arr.length - 1][0] == "\n"
 
+    @total_warnings += 1
     puts "Final empty newline missing"
-    false
   end
 
   def indentation(str, arr)
@@ -79,6 +89,7 @@ module StyleRules
       end
       indentation += 2 unless (arr_two & ruby_keywords).empty?
     end
+    @total_warnings += warnings
     warnings
   end
 
@@ -110,5 +121,13 @@ module StyleRules
       break
     end
     column_num <= result
+  end
+
+  def total_num_of_issues
+    if @total_warnings == 0
+      puts "Congratulations! no issues found" 
+    else
+      puts "You have #{@total_warnings} warnings in your file"
+    end
   end
 end
