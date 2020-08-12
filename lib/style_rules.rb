@@ -87,8 +87,10 @@ module StyleRules
     (0..arr.length - 1).each do |i|
       next unless arr[i][2] == line_num
 
-      (0..spaces - 1).each do |j|
-        result += 1 if arr[i + j][0] == ' '
+      j = i
+      while arr[j][0] == ' '
+        result += 1
+        j += 1
       end
       break
     end
