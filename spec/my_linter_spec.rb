@@ -34,7 +34,7 @@ describe Parser do
 end
 
 describe StyleRules do
-  linter_test = StyleRules.new 
+  linter_test = StyleRules.new
 
   let(:test_arr) do
     [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1], ["d", 7, 1],

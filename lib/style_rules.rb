@@ -125,8 +125,8 @@ class StyleRules
   end
 
   def total_num_of_issues
-    if @total_warnings == 0
-      puts "Congratulations! no issues found" 
+    if @total_warnings.zero?
+      puts "Congratulations! no issues found"
     else
       puts "You have #{@total_warnings} warnings in your file"
     end
