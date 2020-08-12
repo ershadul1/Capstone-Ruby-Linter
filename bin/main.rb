@@ -5,6 +5,8 @@ class Linter
   include StyleRules
   include Parser
 
+  attr_reader :string, :arr
+
   def initialize(string)
     @string = string
     @arr = char_separator(@string)
