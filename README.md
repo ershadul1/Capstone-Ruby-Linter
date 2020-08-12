@@ -17,7 +17,7 @@
 
 ## Indentation
 
-> Use at least two spaces per indentation level 
+> Use two spaces per indentation level 
 
 ### Good
 
@@ -85,7 +85,7 @@ print 'First, and foremost - numerous studies have shown that humans read much f
 
 ## Redundant spaces
 
-> No more than one space should be included between 'def' and method name
+> No more than one space should be included in between words
 
 ### Good
 
