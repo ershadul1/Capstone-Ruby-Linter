@@ -84,7 +84,7 @@ class StyleRules
     arr_one.each_with_index do |i, index|
       arr_two = i.split(' ')
       indentation -= 2 if arr_two.include?('end')
-      if indentation > 1 and !indentation_checker(arr, index + 1, indentation)
+      unless required_indentation_exists(arr, index + 1, indentation)
         puts "Fix indentation @ line #{index + 1}"
         warnings += 1
       end
@@ -94,7 +94,7 @@ class StyleRules
     warnings
   end
 
-  def indentation_checker(arr, line_num, spaces)
+  def indentation_checker(arr, line_num)
     result = 0
     (0..arr.length - 1).each do |i|
       next unless arr[i][2] == line_num
@@ -106,22 +106,15 @@ class StyleRules
       end
       break
     end
-    result == spaces
+    result
+  end
+
+  def required_indentation_exists(arr, line_num, spaces)
+    spaces == indentation_checker(arr, line_num)
   end
 
   def a_indentation_space?(arr, line_num, column_num)
-    result = 0
-    (0..arr.length - 1).each do |i|
-      next unless arr[i][2] == line_num
-
-      j = i
-      while arr[j][0] == ' '
-        result += 1
-        j += 1
-      end
-      break
-    end
-    column_num <= result
+    column_num <= indentation_checker(arr, line_num)
   end
 
   def total_num_of_issues
