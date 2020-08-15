@@ -24,7 +24,7 @@ class StyleRules
   def trailing_space(arr)
     warnings = 0
     (0..arr.length - 1).each do |i|
-      if arr[i][0] == "\n" && arr[i - 1][0] == ' '
+      if arr[i][0] == "\n" and arr[i - 1][0] == ' '
         puts "Trailing-White-Space @ line: #{arr[i][2]}"
         warnings += 1
       end
@@ -60,7 +60,7 @@ class StyleRules
     line_num = 0
     warnings = 0
     (0..arr.length - 1).each do |i|
-      next unless arr[i][1] > 70 && arr[i][2] != line_num
+      next unless arr[i][1] > 70 and arr[i][2] != line_num
 
       line_num = arr[i][2]
       puts "Exceed-Max-Line-Length(70) @ line #{line_num}"
