@@ -1,6 +1,8 @@
 class StyleRules
   attr_reader :total_warnings
 
+  KEYWORDS = %w[class when def while for do if else elsif module unless case until].freeze
+
   def initialize
     @total_warnings = 0
   end
@@ -78,7 +80,6 @@ class StyleRules
 
   def indentation(str, arr)
     warnings = 0
-    ruby_keywords = %w[class when def while for do if else elsif module unless case until]
     indentation = 0
     arr_one = str.split("\n")
     arr_one.each_with_index do |i, index|
@@ -88,7 +89,7 @@ class StyleRules
         puts "Fix indentation @ line #{index + 1}"
         warnings += 1
       end
-      indentation += 2 unless (arr_two & ruby_keywords).empty?
+      indentation += 2 unless (arr_two & KEYWORDS).empty?
     end
     @total_warnings += warnings
     warnings
