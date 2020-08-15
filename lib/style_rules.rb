@@ -95,6 +95,16 @@ class StyleRules
     warnings
   end
 
+  def total_num_of_issues
+    if @total_warnings.zero?
+      puts "Congratulations! no issues found"
+    else
+      puts "You have #{@total_warnings} warnings in your file"
+    end
+  end
+
+  private
+
   def indentation_checker(arr, line_num)
     result = 0
     (0..arr.length - 1).each do |i|
@@ -116,13 +126,5 @@ class StyleRules
 
   def a_indentation_space?(arr, line_num, column_num)
     column_num <= indentation_checker(arr, line_num)
-  end
-
-  def total_num_of_issues
-    if @total_warnings.zero?
-      puts "Congratulations! no issues found"
-    else
-      puts "You have #{@total_warnings} warnings in your file"
-    end
   end
 end
