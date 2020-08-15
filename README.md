@@ -31,7 +31,7 @@ end
 
 ```
 def some_method
-do_something
+    do_something
 end
 ```
 
@@ -132,9 +132,9 @@ end
 ## How to use the linter
 
 - navigate to your desired directory in your local machine
-- clone the repo : `git@github.com:ershadul1/Capstone-Ruby-Linter.git`
+- clone the repo : `git clone git@github.com:ershadul1/Capstone-Ruby-Linter.git`
 - change directory into above cloned directory : `cd Capstone-Ruby-Linter`
-- navigate to bin directory
+- navigate to bin directory : `cd bin`
 - save your test file inside the bin folder
 - now run the following command to check for linter errors on your test file
 - `ruby main.rb filename.rb`
