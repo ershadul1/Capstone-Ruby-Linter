@@ -131,17 +131,4 @@ describe StyleRules do
       expect(linter_test.indentation(string, arr)).to eql(0)
     end
   end
-
-  context '#indentation_checker' do
-    it 'when the given line contains proper indentation' do
-      expect(linter_test.indentation_checker(test_arr, 2, 2)).to eql(true)
-    end
-
-    it 'when the given line does not contain proper indentation' do
-      arr = [["d", 1, 1], ["e", 2, 1], ["f", 3, 1], [" ", 4, 1], ["a", 5, 1], ["d", 6, 1],
-             ["d", 7, 1], ["\n", 8, 1], [" ", 1, 2], [" ", 2, 2], [" ", 3, 2], [" ", 4, 2],
-             ["s", 5, 2], ["u", 6, 2], ["m", 7, 2], ["\n", 8, 2], ["e", 1, 3], ["n", 2, 3], ["d", 3, 3]]
-      expect(linter_test.indentation_checker(arr, 2, 2)).to eql(false)
-    end
-  end
 end

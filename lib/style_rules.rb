@@ -1,6 +1,8 @@
 class StyleRules
   attr_reader :total_warnings
 
+  KEYWORDS = %w[class when def while for do if else elsif module unless case until].freeze
+
   def initialize
     @total_warnings = 0
   end
@@ -22,7 +24,7 @@ class StyleRules
   def trailing_space(arr)
     warnings = 0
     (0..arr.length - 1).each do |i|
-      if arr[i][0] == "\n" && arr[i - 1][0] == ' '
+      if arr[i][0] == "\n" and arr[i - 1][0] == ' '
         puts "Trailing-White-Space @ line: #{arr[i][2]}"
         warnings += 1
       end
@@ -58,7 +60,7 @@ class StyleRules
     line_num = 0
     warnings = 0
     (0..arr.length - 1).each do |i|
-      next unless arr[i][1] > 70 && arr[i][2] != line_num
+      next unless arr[i][1] > 70 and arr[i][2] != line_num
 
       line_num = arr[i][2]
       puts "Exceed-Max-Line-Length(70) @ line #{line_num}"
@@ -78,50 +80,19 @@ class StyleRules
 
   def indentation(str, arr)
     warnings = 0
-    ruby_keywords = %w[class when def while for do if else elsif module unless case until]
     indentation = 0
     arr_one = str.split("\n")
     arr_one.each_with_index do |i, index|
       arr_two = i.split(' ')
       indentation -= 2 if arr_two.include?('end')
-      if indentation > 1 and !indentation_checker(arr, index + 1, indentation)
+      unless required_indentation_exists(arr, index + 1, indentation)
         puts "Fix indentation @ line #{index + 1}"
         warnings += 1
       end
-      indentation += 2 unless (arr_two & ruby_keywords).empty?
+      indentation += 2 unless (arr_two & KEYWORDS).empty?
     end
     @total_warnings += warnings
     warnings
-  end
-
-  def indentation_checker(arr, line_num, spaces)
-    result = 0
-    (0..arr.length - 1).each do |i|
-      next unless arr[i][2] == line_num
-
-      j = i
-      while arr[j][0] == ' '
-        result += 1
-        j += 1
-      end
-      break
-    end
-    result == spaces
-  end
-
-  def a_indentation_space?(arr, line_num, column_num)
-    result = 0
-    (0..arr.length - 1).each do |i|
-      next unless arr[i][2] == line_num
-
-      j = i
-      while arr[j][0] == ' '
-        result += 1
-        j += 1
-      end
-      break
-    end
-    column_num <= result
   end
 
   def total_num_of_issues
@@ -130,5 +101,30 @@ class StyleRules
     else
       puts "You have #{@total_warnings} warnings in your file"
     end
+  end
+
+  private
+
+  def indentation_checker(arr, line_num)
+    result = 0
+    (0..arr.length - 1).each do |i|
+      next unless arr[i][2] == line_num
+
+      j = i
+      while arr[j][0] == ' '
+        result += 1
+        j += 1
+      end
+      break
+    end
+    result
+  end
+
+  def required_indentation_exists(arr, line_num, spaces)
+    spaces == indentation_checker(arr, line_num)
+  end
+
+  def a_indentation_space?(arr, line_num, column_num)
+    column_num <= indentation_checker(arr, line_num)
   end
 end
