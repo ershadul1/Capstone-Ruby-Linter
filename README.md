@@ -42,7 +42,7 @@ end
 ## Blank lines
 
 > No blank lines should be included in between codes
-> But add one blank line after methods 
+> But add one blank line can be added after methods 
 
 ### Good
 
@@ -139,6 +139,12 @@ end
 - now run the following command to check for linter errors on your test file
 - `ruby main.rb filename.rb`
 - Now you will get reports about the errors
+
+## Live Demo
+
+- Go to this [link](https://repl.it/@Ershadul/Capstone-Ruby-Linter#bin/input.rb)
+- Add your test code inside input.rb file
+- Press the run button
 
 ## Authors
 
